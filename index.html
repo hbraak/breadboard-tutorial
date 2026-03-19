@@ -31,13 +31,11 @@ body {
   font-size: 17px;
 }
 
-/* Header & Nav */
 header {
   background: var(--header-bg);
   color: white;
   padding: 2.5rem 1rem 2rem;
   text-align: center;
-  position: relative;
 }
 header h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: .4rem; }
 header p { color: #94a3b8; font-size: 1.05rem; }
@@ -65,13 +63,12 @@ nav a {
 }
 nav a:hover, nav a:focus { background: #1e3a5f; color: white; }
 
-/* Main Layout */
 main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
 
 section {
   background: var(--card-bg);
   border-radius: 12px;
-  padding: 2rem 2rem 2.2rem;
+  padding: 2rem;
   margin-bottom: 2rem;
   border: 1px solid var(--border);
   box-shadow: 0 1px 3px rgba(0,0,0,.05);
@@ -91,6 +88,44 @@ p + p { margin-top: .8rem; }
 ul, ol { margin: .6rem 0 .6rem 1.5rem; }
 li { margin-bottom: .35rem; }
 
+/* Image styling */
+.img-block {
+  margin: 1.2rem 0;
+  text-align: center;
+}
+.img-block img {
+  max-width: 100%;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.img-block.small img {
+  max-width: 400px;
+}
+.img-caption {
+  font-size: .85rem;
+  color: var(--text-light);
+  margin-top: .4rem;
+  font-style: italic;
+}
+
+/* Side-by-side images */
+.img-row {
+  display: flex;
+  gap: 1rem;
+  margin: 1.2rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.img-row .img-block {
+  flex: 1 1 280px;
+  max-width: 48%;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .img-row .img-block { max-width: 100%; }
+}
+
 .highlight {
   background: #eff6ff;
   border-left: 4px solid var(--accent);
@@ -98,7 +133,6 @@ li { margin-bottom: .35rem; }
   border-radius: 0 8px 8px 0;
   margin: 1rem 0;
 }
-
 .warning {
   background: #fef2f2;
   border-left: 4px solid var(--red);
@@ -106,7 +140,6 @@ li { margin-bottom: .35rem; }
   border-radius: 0 8px 8px 0;
   margin: 1rem 0;
 }
-
 .tip {
   background: #f0fdf4;
   border-left: 4px solid var(--green);
@@ -117,6 +150,26 @@ li { margin-bottom: .35rem; }
 
 strong { color: var(--header-bg); }
 code { background: #f1f5f9; padding: .15em .4em; border-radius: 4px; font-size: .93em; }
+
+/* Key concepts table */
+.key-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: .95rem;
+}
+.key-table th, .key-table td {
+  padding: .6rem .8rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+.key-table th {
+  background: var(--header-bg);
+  color: white;
+  font-weight: 600;
+}
+.key-table tr:nth-child(even) { background: #f8fafc; }
+.key-table td:first-child { font-weight: 600; white-space: nowrap; }
 
 /* Breadboard Interactive */
 .breadboard-wrapper {
@@ -221,6 +274,8 @@ footer {
   color: var(--text-light);
   font-size: .85rem;
 }
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
 
 @media (max-width: 640px) {
   section { padding: 1.3rem 1.1rem; }
@@ -250,50 +305,86 @@ footer {
 <!-- 1. Was ist ein Breadboard? -->
 <section id="was">
   <h2>1. Was ist ein Breadboard?</h2>
-  <p>Ein <strong>Breadboard</strong> (deutsch: Steckbrett) ist eine Experimentierplattform, mit der Sie elektronische Schaltungen <strong>ohne Löten</strong> aufbauen können. Sie stecken Bauteile und Kabel einfach in die Löcher — fertig ist die Schaltung.</p>
+
+  <div class="img-block">
+    <img src="https://cdn.sparkfun.com/assets/0/a/b/a/5/5192a48fce395f1573000000.jpg"
+         alt="Breadboard mit gesteckten Bauteilen und Kabeln" loading="lazy">
+    <div class="img-caption">Ein typisches Breadboard mit Bauteilen und Verbindungskabeln</div>
+  </div>
+
+  <p>Ein <strong>Breadboard</strong> (Steckbrett) ist eine Experimentierplattform für elektronische Schaltungen — <strong>ohne Löten</strong>. Bauteile und Kabel werden einfach in die Löcher gesteckt.</p>
 
   <div class="highlight">
     <h3>Woher kommt der Name?</h3>
-    <p>In den Anfängen der Elektronik (1920er–1960er Jahre) haben Bastler ihre Schaltungen tatsächlich auf <strong>Holzbrettchen</strong> aufgebaut — oft auf den Brettern, auf denen Brot geschnitten wurde! Sie haben Nägel eingeschlagen und Drähte darum gewickelt. Daher der Name <em>Breadboard</em> — wörtlich: „Brotbrett".</p>
-    <p>Das moderne, weiße Steckbrett mit Kunststoffgehäuse wurde in den 1970er Jahren entwickelt und ist seitdem das Standardwerkzeug für Prototypen in der Elektronik.</p>
+    <p>In den 1920er–1960er Jahren haben Bastler Schaltungen auf <strong>Brotbrettern</strong> aufgebaut — mit Nägeln und Drähten. Daher: <em>Breadboard</em> = „Brotbrett". Das moderne Kunststoff-Steckbrett gibt es seit den 1970ern.</p>
   </div>
-
-  <p>Breadboards sind ideal zum <strong>Lernen und Experimentieren</strong>: Sie können Schaltungen schnell aufbauen, testen, verändern und wieder auseinandernehmen — ganz ohne bleibende Veränderungen an den Bauteilen.</p>
 </section>
 
 <!-- 2. Aufbau -->
 <section id="aufbau">
   <h2>2. Aufbau eines Breadboards</h2>
-  <p>Ein typisches Breadboard besteht aus mehreren Bereichen:</p>
 
-  <h3>Terminal Strips (Steckfelder)</h3>
-  <p>Der zentrale Bereich mit den vielen Löchern. Hier stecken Sie Ihre Bauteile ein. Die Löcher sind in <strong>Reihen</strong> (nummeriert 1–30) und <strong>Spalten</strong> (beschriftet a–e und f–j) organisiert.</p>
-  <p>Jede Reihe hat <strong>zwei Gruppen à 5 Löcher</strong>: links (a–e) und rechts (f–j). Die 5 Löcher einer Seite sind intern miteinander verbunden.</p>
-
-  <h3>DIP-Rinne (Mittelrinne)</h3>
-  <p>Die <strong>Lücke in der Mitte</strong> trennt die linke Seite (a–e) von der rechten Seite (f–j). Sie ist genau so breit, dass ein IC-Chip (Integrierter Schaltkreis) darüber gesteckt werden kann, ohne dass seine Beine sich kurzschließen. DIP steht für <em>Dual Inline Package</em>.</p>
-
-  <h3>Power Rails (Stromschienen)</h3>
-  <p>Am oberen und unteren Rand verlaufen je <strong>zwei lange Leisten</strong>, markiert mit <span style="color:var(--red);font-weight:700;">+ (rot)</span> und <span style="color:var(--accent);font-weight:700;">− (blau)</span>. Diese sind für die Stromversorgung gedacht. Alle Löcher einer Schiene sind untereinander verbunden.</p>
-
-  <div class="tip">
-    <strong>Tipp:</strong> Bei manchen Breadboards sind die Power Rails in der Mitte unterbrochen! Prüfen Sie, ob die Markierungslinie durchgezogen oder unterbrochen ist. Im Zweifel verbinden Sie beide Hälften mit einem Kabel.
+  <div class="img-block">
+    <img src="https://cdn.sparkfun.com/assets/3/d/f/a/9/518c0b34ce395fea62000002.jpg"
+         alt="Breadboard von oben und unten — Metallkontakte sichtbar" loading="lazy">
+    <div class="img-caption">Links: Breadboard von oben. Rechts: Rückseite mit sichtbaren Metallkontakten.</div>
   </div>
 
-  <h3>Nummerierung &amp; Beschriftung</h3>
-  <p>Die Reihen sind von <strong>1 bis 30</strong> nummeriert (je nach Breadboard-Größe). Die Spalten sind mit <strong>a–e</strong> (links) und <strong>f–j</strong> (rechts) beschriftet. So können Sie genau sagen: „Stecken Sie den Widerstand in <code>e12</code> und <code>e16</code>."</p>
+  <table class="key-table">
+    <tr>
+      <th>Bereich</th>
+      <th>Was?</th>
+      <th>Verbindung</th>
+    </tr>
+    <tr>
+      <td>🔌 Terminal Strips</td>
+      <td>Zentrale Löcher (a–e links, f–j rechts)</td>
+      <td>5 Löcher pro Reihe &amp; Seite horizontal verbunden</td>
+    </tr>
+    <tr>
+      <td>📏 DIP-Rinne</td>
+      <td>Lücke in der Mitte</td>
+      <td>Trennt links (a–e) von rechts (f–j) — <strong>keine</strong> Verbindung!</td>
+    </tr>
+    <tr>
+      <td style="color:var(--red);">⊕ Plus-Schiene</td>
+      <td>Rote Leiste am Rand (+)</td>
+      <td>Alle Löcher vertikal verbunden</td>
+    </tr>
+    <tr>
+      <td style="color:var(--accent);">⊖ Minus-Schiene</td>
+      <td>Blaue Leiste am Rand (−)</td>
+      <td>Alle Löcher vertikal verbunden</td>
+    </tr>
+  </table>
+
+  <div class="img-row">
+    <div class="img-block">
+      <img src="https://cdn.sparkfun.com/assets/e/7/7/e/c/5175c500ce395f5a49000004.jpg"
+           alt="Mini-Breadboard Vorder- und Rückseite" loading="lazy">
+      <div class="img-caption">Mini-Breadboard: Oben die Löcher, unten die Metallclips</div>
+    </div>
+    <div class="img-block">
+      <img src="https://cdn.sparkfun.com/assets/f/8/7/0/f/513a1dfbce395fe624000001.JPG"
+           alt="Einzelner Metallstreifen aus einem Breadboard" loading="lazy">
+      <div class="img-caption">Ein einzelner Metallstreifen — 5 Clips greifen in 5 Löcher</div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Bei manchen Breadboards sind die Power Rails in der Mitte unterbrochen! Prüfen Sie die Markierungslinie. Im Zweifel: beide Hälften mit einem Kabel verbinden.
+  </div>
 </section>
 
 <!-- 3. Interne Verbindungen — Interaktiv -->
 <section id="verbindungen">
   <h2>3. Interne Verbindungen</h2>
-  <p>Das Verständnis der internen Verbindungen ist der <strong>wichtigste Punkt</strong> beim Arbeiten mit einem Breadboard. Klicken Sie auf ein beliebiges Loch im Breadboard unten, um zu sehen, welche Löcher miteinander verbunden sind!</p>
+  <p>Das <strong>Wichtigste</strong> beim Breadboard: Welche Löcher sind verbunden? Klicken Sie auf ein Loch!</p>
 
   <div class="breadboard-wrapper">
-    <div class="bb-instruction">Klicken Sie auf ein Loch, um die Verbindungen zu sehen!</div>
+    <div class="bb-instruction">👆 Klicken Sie auf ein Loch, um die Verbindungen zu sehen!</div>
     <div id="breadboard-container">
-      <svg id="breadboard-svg" viewBox="0 0 620 520" width="620" height="520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interaktives Breadboard">
-      </svg>
+      <svg id="breadboard-svg" viewBox="0 0 620 520" width="620" height="520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interaktives Breadboard"></svg>
     </div>
     <div id="bb-info">Klicken Sie auf ein Loch im Breadboard, um die internen Verbindungen zu erkunden.</div>
     <div class="bb-legend">
@@ -310,46 +401,63 @@ footer {
   <h2>4. Wie steckt man Bauteile ein?</h2>
 
   <h3>Widerstände</h3>
-  <p>Widerstände haben <strong>zwei Anschlussdrähte</strong>. Stecken Sie jeden Draht in ein Loch einer <strong>anderen Reihe</strong> oder auf verschiedenen Seiten der DIP-Rinne. Beispiel: Ein Draht in <code>a5</code>, der andere in <code>a10</code>.</p>
+  <p>Beide Drähte in <strong>unterschiedliche Reihen</strong> stecken (z.B. <code>a5</code> und <code>a10</code>).</p>
   <div class="warning">
-    <strong>Fehler:</strong> Stecken Sie niemals beide Drähte eines Widerstands in die <strong>gleiche 5er-Gruppe</strong> (z.B. <code>a5</code> und <code>c5</code>). Das erzeugt einen Kurzschluss — der Strom fließt um den Widerstand herum, statt hindurch!
+    <strong>Fehler:</strong> Beide Drähte in der <strong>gleichen 5er-Gruppe</strong> (z.B. <code>a5</code> und <code>c5</code>) = Kurzschluss! Der Strom umgeht den Widerstand.
   </div>
 
   <h3>LEDs</h3>
-  <p>LEDs haben ein <strong>langes Bein (+, Anode)</strong> und ein <strong>kurzes Bein (−, Kathode)</strong>. Stecken Sie die Beine in <strong>unterschiedliche Reihen</strong>. Denken Sie daran: LEDs brauchen immer einen <strong>Vorwiderstand</strong>, sonst brennen sie durch!</p>
+  <div class="img-block small">
+    <img src="https://cdn.sparkfun.com/assets/1/b/b/3/a/518c07b8ce395f7962000000.jpg"
+         alt="LED über der DIP-Rinne eingesteckt" loading="lazy">
+    <div class="img-caption">LED über der DIP-Rinne: Jedes Bein hat eine eigene 5er-Gruppe</div>
+  </div>
+  <p>Langes Bein = <strong>+ (Anode)</strong>, kurzes Bein = <strong>− (Kathode)</strong>. Immer einen <strong>Vorwiderstand</strong> verwenden!</p>
 
   <h3>Verbindungskabel (Jumper Wires)</h3>
-  <p>Mit Kabeln stellen Sie Verbindungen zwischen verschiedenen Reihen oder zwischen Terminal Strips und Power Rails her. Es gibt drei Typen:</p>
+  <div class="img-block small">
+    <img src="https://cdn.sparkfun.com/assets/6/3/7/f/3/518c07b8ce395fd064000000.jpg"
+         alt="Jumper Wires verbinden die Power Rails" loading="lazy">
+    <div class="img-caption">Jumper Wires verbinden die Power Rails beider Seiten</div>
+  </div>
   <ul>
-    <li><strong>Male-to-Male:</strong> Beide Enden zum Einstecken ins Breadboard</li>
-    <li><strong>Male-to-Female:</strong> Ein Ende ins Breadboard, das andere auf einen Pin</li>
-    <li><strong>Starre Drahtbrücken:</strong> Kurze, vorgefertigte U-förmige Drähte — besonders übersichtlich</li>
+    <li><strong>Male-to-Male:</strong> Beide Enden ins Breadboard</li>
+    <li><strong>Starre Drahtbrücken:</strong> Kurze U-förmige Drähte — besonders übersichtlich</li>
   </ul>
 
   <h3>ICs (Integrierte Schaltkreise)</h3>
-  <p>ICs werden <strong>über die DIP-Rinne</strong> gesteckt, sodass die Beine auf beiden Seiten in unterschiedliche 5er-Gruppen greifen. So hat jeder Pin seine eigene Reihe und kann separat verdrahtet werden.</p>
+  <p>ICs werden <strong>über die DIP-Rinne</strong> gesteckt — so hat jeder Pin seine eigene Reihe.</p>
 </section>
 
 <!-- 5. Stromversorgung -->
 <section id="strom">
   <h2>5. Stromversorgung anschließen</h2>
-  <p>Es gibt verschiedene Möglichkeiten, Ihr Breadboard mit Strom zu versorgen:</p>
 
-  <h3>Über einen Arduino / Mikrocontroller</h3>
-  <p>Am einfachsten: Verbinden Sie den <strong>5V-Pin</strong> des Arduino mit der <span style="color:var(--red);font-weight:600;">roten (+)</span> Power Rail und den <strong>GND-Pin</strong> mit der <span style="color:var(--accent);font-weight:600;">blauen (−)</span> Power Rail.</p>
-
-  <h3>Über ein Netzteil-Modul</h3>
-  <p>Breadboard-Netzteile werden direkt auf die Power Rails gesteckt und liefern wahlweise 3,3V oder 5V.</p>
-
-  <h3>Über eine Batterie</h3>
-  <p>Mit einem Batteriehalter und Kabeln können Sie auch mobil arbeiten. Achten Sie auf die richtige Spannung!</p>
+  <table class="key-table">
+    <tr>
+      <th>Methode</th>
+      <th>Wie?</th>
+    </tr>
+    <tr>
+      <td>🔋 Batterie</td>
+      <td>Batteriehalter → + an rote Schiene, − an blaue Schiene</td>
+    </tr>
+    <tr>
+      <td>⚡ Netzteil-Modul</td>
+      <td>Direkt auf Power Rails stecken (3,3V oder 5V wählbar)</td>
+    </tr>
+    <tr>
+      <td>🖥️ Arduino</td>
+      <td>5V-Pin → rote (+) Rail, GND-Pin → blaue (−) Rail</td>
+    </tr>
+  </table>
 
   <div class="warning">
-    <strong>Wichtig:</strong> Verbinden Sie <strong>niemals</strong> die Plus-Schiene direkt mit der Minus-Schiene — das erzeugt einen <strong>Kurzschluss</strong> und kann die Stromquelle oder Bauteile beschädigen!
+    <strong>Niemals</strong> Plus direkt mit Minus verbinden — <strong>Kurzschluss!</strong>
   </div>
 
   <div class="tip">
-    <strong>Tipp:</strong> Wenn Sie beide Seiten des Breadboards mit Strom versorgen möchten, verbinden Sie die obere und untere Power Rail jeweils mit einem Kabel (+ mit + und − mit −).
+    <strong>Tipp:</strong> Obere und untere Power Rails sind <strong>nicht automatisch verbunden</strong>. Bei Bedarf mit Kabeln brücken (+ mit +, − mit −).
   </div>
 </section>
 
@@ -357,30 +465,47 @@ footer {
 <section id="fehler">
   <h2>6. Häufige Fehler</h2>
 
-  <h3>1. Kurzschluss durch gleiche Reihe</h3>
-  <p>Wenn beide Anschlüsse eines Bauteils in der <strong>gleichen 5er-Gruppe</strong> stecken, sind sie direkt verbunden. Der Strom umgeht das Bauteil — ein Kurzschluss!</p>
-
-  <h3>2. Falsche Reihe</h3>
-  <p>Bauteile die verbunden sein sollen, müssen in der <strong>gleichen Reihe</strong> stecken (gleiche Nummer, z.B. beide in Reihe 12). Ein Loch daneben (Reihe 11 oder 13) ist bereits eine <strong>komplett andere</strong> Verbindung.</p>
-
-  <h3>3. DIP-Rinne vergessen</h3>
-  <p>Die linke Seite (a–e) und die rechte Seite (f–j) einer Reihe sind <strong>nicht</strong> miteinander verbunden! Wenn Sie eine Verbindung über die Rinne brauchen, müssen Sie ein Kabel verwenden.</p>
-
-  <h3>4. Power Rails nicht verbunden</h3>
-  <p>Die obere und untere Power Rail sind <strong>nicht automatisch verbunden</strong>. Wenn Sie Strom auf beiden Seiten brauchen, müssen Sie Brücken stecken.</p>
-
-  <h3>5. Wackelkontakte</h3>
-  <p>Wenn ein Bauteil nicht richtig sitzt, kann der Kontakt unterbrochen sein. Drücken Sie Bauteile und Kabel <strong>fest in die Löcher</strong>, bis sie einrasten.</p>
+  <table class="key-table">
+    <tr>
+      <th>Fehler</th>
+      <th>Was passiert?</th>
+      <th>Lösung</th>
+    </tr>
+    <tr>
+      <td>🔴 Gleiche 5er-Gruppe</td>
+      <td>Kurzschluss — Bauteil wird überbrückt</td>
+      <td>Drähte in verschiedene Reihen stecken</td>
+    </tr>
+    <tr>
+      <td>🔴 Falsche Reihe</td>
+      <td>Bauteile nicht verbunden</td>
+      <td>Reihennummer prüfen (z.B. beide in Reihe 12)</td>
+    </tr>
+    <tr>
+      <td>🔴 DIP-Rinne vergessen</td>
+      <td>Links und rechts nicht verbunden</td>
+      <td>Jumper Wire über die Rinne</td>
+    </tr>
+    <tr>
+      <td>🔴 Power Rails getrennt</td>
+      <td>Kein Strom auf einer Seite</td>
+      <td>Obere und untere Rails brücken</td>
+    </tr>
+    <tr>
+      <td>🟡 Wackelkontakt</td>
+      <td>Unterbrechung, sporadische Fehler</td>
+      <td>Bauteile fest eindrücken</td>
+    </tr>
+  </table>
 
   <div class="highlight">
-    <strong>Systematisch prüfen:</strong> Wenn eine Schaltung nicht funktioniert, prüfen Sie zuerst die Stromversorgung, dann jede Verbindung einzeln. Arbeiten Sie sich vom Pluspol zum Minuspol vor.
+    <strong>Systematisch prüfen:</strong> Stromversorgung → jede Verbindung einzeln → vom Pluspol zum Minuspol durcharbeiten.
   </div>
 </section>
 
 <!-- 7. Quiz -->
 <section id="quiz">
   <h2>7. Testen Sie Ihr Wissen!</h2>
-  <p>Beantworten Sie die folgenden Fragen, um zu prüfen, ob Sie das Breadboard verstanden haben.</p>
 
   <div class="quiz-question" data-correct="1">
     <p>Frage 1: Wie viele Löcher sind in einer Terminal-Strip-Reihe auf einer Seite intern verbunden?</p>
@@ -392,27 +517,27 @@ footer {
   </div>
 
   <div class="quiz-question" data-correct="2">
-    <p>Frage 2: Was passiert, wenn Sie beide Drähte eines Widerstands in Loch <code>a5</code> und <code>c5</code> stecken?</p>
+    <p>Frage 2: Was passiert, wenn Sie beide Drähte eines Widerstands in <code>a5</code> und <code>c5</code> stecken?</p>
     <button class="quiz-option" data-value="0">Der Widerstand funktioniert normal</button>
     <button class="quiz-option" data-value="1">Der Widerstand hat den doppelten Widerstandswert</button>
-    <button class="quiz-option" data-value="2">Es entsteht ein Kurzschluss — der Strom umgeht den Widerstand</button>
+    <button class="quiz-option" data-value="2">Kurzschluss — der Strom umgeht den Widerstand</button>
     <button class="quiz-option" data-value="3">Die LED leuchtet heller</button>
     <div class="quiz-feedback"></div>
   </div>
 
   <div class="quiz-question" data-correct="0">
-    <p>Frage 3: Wofür ist die DIP-Rinne in der Mitte des Breadboards gedacht?</p>
-    <button class="quiz-option" data-value="0">Damit ICs eingesteckt werden können, ohne dass sich ihre Pins kurzschließen</button>
-    <button class="quiz-option" data-value="1">Zur Belüftung der Schaltung</button>
+    <p>Frage 3: Wofür ist die DIP-Rinne in der Mitte?</p>
+    <button class="quiz-option" data-value="0">Damit ICs eingesteckt werden können, ohne Kurzschluss</button>
+    <button class="quiz-option" data-value="1">Zur Belüftung</button>
     <button class="quiz-option" data-value="2">Als zusätzliche Stromschiene</button>
     <button class="quiz-option" data-value="3">Rein dekorativ</button>
     <div class="quiz-feedback"></div>
   </div>
 
   <div class="quiz-question" data-correct="1">
-    <p>Frage 4: Sind die linke Seite (a–e) und die rechte Seite (f–j) einer Reihe miteinander verbunden?</p>
-    <button class="quiz-option" data-value="0">Ja, alle 10 Löcher einer Reihe sind verbunden</button>
-    <button class="quiz-option" data-value="1">Nein, die DIP-Rinne trennt die beiden Seiten</button>
+    <p>Frage 4: Sind die linke Seite (a–e) und rechte Seite (f–j) einer Reihe verbunden?</p>
+    <button class="quiz-option" data-value="0">Ja, alle 10 Löcher sind verbunden</button>
+    <button class="quiz-option" data-value="1">Nein, die DIP-Rinne trennt die Seiten</button>
     <button class="quiz-option" data-value="2">Nur bei den Power Rails</button>
     <button class="quiz-option" data-value="3">Nur wenn ein IC eingesteckt ist</button>
     <div class="quiz-feedback"></div>
@@ -421,10 +546,24 @@ footer {
   <div id="quiz-result"></div>
 </section>
 
+<!-- Simulator Link -->
+<section id="simulator">
+  <h2>🔧 Jetzt selbst ausprobieren!</h2>
+  <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-radius: 12px; padding: 2rem; text-align: center; margin-top: 1rem;">
+    <p style="font-size: 1.1rem; margin-bottom: 1rem;">Bauen Sie Ihre eigene Schaltung auf einem virtuellen Breadboard!</p>
+    <a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener"
+       style="display: inline-block; background: #1a3a5c; color: white; padding: 1rem 2.5rem; border-radius: 8px; text-decoration: none; font-size: 1.2rem; font-weight: bold;">
+      🚀 Tinkercad Circuits öffnen
+    </a>
+    <p style="font-size: 0.9rem; color: #555; margin-top: 1rem;">Kostenlos von Autodesk — Drag &amp; Drop, Simulation, Schaltung testen.</p>
+  </div>
+</section>
+
 </main>
 
 <footer>
   <p>Erstellt für den Physikunterricht — Interaktive Breadboard-Einführung</p>
+  <p style="margin-top: .5rem;">Breadboard-Fotos: <a href="https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard" target="_blank" rel="noopener">SparkFun Electronics</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
 </footer>
 
 <script>
@@ -440,11 +579,9 @@ footer {
   const COLS_LEFT = ['a','b','c','d','e'];
   const COLS_RIGHT = ['f','g','h','i','j'];
 
-  // Layout constants
   const MARGIN_LEFT = 50;
   const MARGIN_TOP = 60;
   const HOLE_SPACING = 17;
-  const ROW_LABEL_X = 30;
   const POWER_RAIL_Y_TOP_PLUS = 18;
   const POWER_RAIL_Y_TOP_MINUS = 36;
   const TERMINAL_TOP = MARGIN_TOP;
@@ -457,8 +594,7 @@ footer {
 
   function createText(x, y, text, size, color, anchor) {
     const t = document.createElementNS(NS, 'text');
-    t.setAttribute('x', x);
-    t.setAttribute('y', y);
+    t.setAttribute('x', x); t.setAttribute('y', y);
     t.setAttribute('font-size', size || 10);
     t.setAttribute('fill', color || '#64748b');
     t.setAttribute('text-anchor', anchor || 'middle');
@@ -466,13 +602,11 @@ footer {
     t.setAttribute('dominant-baseline', 'central');
     svg.appendChild(t);
     t.textContent = text;
-    return t;
   }
 
   function createHole(cx, cy, group, row, col, label) {
     const circle = document.createElementNS(NS, 'circle');
-    circle.setAttribute('cx', cx);
-    circle.setAttribute('cy', cy);
+    circle.setAttribute('cx', cx); circle.setAttribute('cy', cy);
     circle.setAttribute('r', 5.5);
     circle.setAttribute('fill', '#374151');
     circle.setAttribute('stroke', '#6b7280');
@@ -480,11 +614,9 @@ footer {
     circle.style.transition = 'fill 0.3s, filter 0.3s';
     circle.style.cursor = 'pointer';
     svg.appendChild(circle);
-
     const hole = { el: circle, group, row, col, label, cx, cy };
     allHoles.push(hole);
     circle.addEventListener('click', () => onHoleClick(hole));
-    return hole;
   }
 
   // Background
@@ -495,7 +627,6 @@ footer {
   bg.setAttribute('stroke', '#d1d5db'); bg.setAttribute('stroke-width', 2);
   svg.appendChild(bg);
 
-  // Board body
   const board = document.createElementNS(NS, 'rect');
   board.setAttribute('x', 8); board.setAttribute('y', 5);
   board.setAttribute('width', 604); board.setAttribute('height', 510);
@@ -503,80 +634,58 @@ footer {
   board.setAttribute('stroke', '#c8c8b8'); board.setAttribute('stroke-width', 1);
   svg.appendChild(board);
 
-  // Power rail backgrounds
   function drawRailBg(y, color) {
     const r = document.createElementNS(NS, 'rect');
-    r.setAttribute('x', MARGIN_LEFT - 8);
-    r.setAttribute('y', y - 8);
-    r.setAttribute('width', ROWS * HOLE_SPACING + 4);
-    r.setAttribute('height', 16);
+    r.setAttribute('x', MARGIN_LEFT - 8); r.setAttribute('y', y - 8);
+    r.setAttribute('width', ROWS * HOLE_SPACING + 4); r.setAttribute('height', 16);
     r.setAttribute('rx', 4);
     r.setAttribute('fill', color === 'red' ? '#fee2e2' : '#dbeafe');
     r.setAttribute('opacity', '0.5');
     svg.appendChild(r);
   }
 
-  // Top power rails
   drawRailBg(POWER_RAIL_Y_TOP_PLUS, 'red');
   drawRailBg(POWER_RAIL_Y_TOP_MINUS, 'blue');
-  createText(MARGIN_LEFT - 18, POWER_RAIL_Y_TOP_PLUS, '+', 13, '#ef4444', 'middle');
-  createText(MARGIN_LEFT - 18, POWER_RAIL_Y_TOP_MINUS, '−', 13, '#3b82f6', 'middle');
-
-  // Bottom power rails
+  createText(MARGIN_LEFT - 18, POWER_RAIL_Y_TOP_PLUS, '+', 13, '#ef4444');
+  createText(MARGIN_LEFT - 18, POWER_RAIL_Y_TOP_MINUS, '−', 13, '#3b82f6');
   drawRailBg(POWER_RAIL_Y_BOT_PLUS, 'red');
   drawRailBg(POWER_RAIL_Y_BOT_MINUS, 'blue');
-  createText(MARGIN_LEFT - 18, POWER_RAIL_Y_BOT_PLUS, '+', 13, '#ef4444', 'middle');
-  createText(MARGIN_LEFT - 18, POWER_RAIL_Y_BOT_MINUS, '−', 13, '#3b82f6', 'middle');
+  createText(MARGIN_LEFT - 18, POWER_RAIL_Y_BOT_PLUS, '+', 13, '#ef4444');
+  createText(MARGIN_LEFT - 18, POWER_RAIL_Y_BOT_MINUS, '−', 13, '#3b82f6');
 
-  // Create power rail holes
   for (let i = 0; i < ROWS; i++) {
     const x = MARGIN_LEFT + i * HOLE_SPACING;
-    createHole(x, POWER_RAIL_Y_TOP_PLUS, 'power-top-plus', i + 1, '+', `+Reihe${i+1} (oben)`);
-    createHole(x, POWER_RAIL_Y_TOP_MINUS, 'power-top-minus', i + 1, '−', `−Reihe${i+1} (oben)`);
-    createHole(x, POWER_RAIL_Y_BOT_PLUS, 'power-bot-plus', i + 1, '+', `+Reihe${i+1} (unten)`);
-    createHole(x, POWER_RAIL_Y_BOT_MINUS, 'power-bot-minus', i + 1, '−', `−Reihe${i+1} (unten)`);
+    createHole(x, POWER_RAIL_Y_TOP_PLUS, 'power-top-plus', i+1, '+', `+Reihe${i+1} (oben)`);
+    createHole(x, POWER_RAIL_Y_TOP_MINUS, 'power-top-minus', i+1, '−', `−Reihe${i+1} (oben)`);
+    createHole(x, POWER_RAIL_Y_BOT_PLUS, 'power-bot-plus', i+1, '+', `+Reihe${i+1} (unten)`);
+    createHole(x, POWER_RAIL_Y_BOT_MINUS, 'power-bot-minus', i+1, '−', `−Reihe${i+1} (unten)`);
   }
 
-  // DIP groove
   const grooveY = TERMINAL_TOP + 5 * HOLE_SPACING - 2;
   const groove = document.createElementNS(NS, 'rect');
-  groove.setAttribute('x', MARGIN_LEFT - 10);
-  groove.setAttribute('y', grooveY);
-  groove.setAttribute('width', ROWS * HOLE_SPACING + 8);
-  groove.setAttribute('height', DIP_GAP + 4);
-  groove.setAttribute('rx', 4);
-  groove.setAttribute('fill', '#d6d3c8');
+  groove.setAttribute('x', MARGIN_LEFT - 10); groove.setAttribute('y', grooveY);
+  groove.setAttribute('width', ROWS * HOLE_SPACING + 8); groove.setAttribute('height', DIP_GAP + 4);
+  groove.setAttribute('rx', 4); groove.setAttribute('fill', '#d6d3c8');
   svg.appendChild(groove);
-  createText(MARGIN_LEFT + (ROWS * HOLE_SPACING) / 2, grooveY + DIP_GAP / 2 + 2, 'DIP-Rinne', 11, '#8b8578', 'middle');
+  createText(MARGIN_LEFT + (ROWS * HOLE_SPACING) / 2, grooveY + DIP_GAP / 2 + 2, 'DIP-Rinne', 11, '#8b8578');
 
-  // Column labels top
   COLS_LEFT.forEach((col, ci) => {
-    createText(MARGIN_LEFT - 20, TERMINAL_TOP + ci * HOLE_SPACING, col, 9, '#94a3b8', 'middle');
+    createText(MARGIN_LEFT - 20, TERMINAL_TOP + ci * HOLE_SPACING, col, 9, '#94a3b8');
   });
   COLS_RIGHT.forEach((col, ci) => {
-    createText(MARGIN_LEFT - 20, TERMINAL_BOTTOM_START + ci * HOLE_SPACING, col, 9, '#94a3b8', 'middle');
+    createText(MARGIN_LEFT - 20, TERMINAL_BOTTOM_START + ci * HOLE_SPACING, col, 9, '#94a3b8');
   });
 
-  // Terminal strips + row numbers
   for (let row = 0; row < ROWS; row++) {
     const x = MARGIN_LEFT + row * HOLE_SPACING;
-    // Row numbers
-    createText(x, TERMINAL_TOP - 11, String(row + 1), 8, '#94a3b8', 'middle');
-
-    // Left side (a-e)
+    createText(x, TERMINAL_TOP - 11, String(row + 1), 8, '#94a3b8');
     COLS_LEFT.forEach((col, ci) => {
-      const y = TERMINAL_TOP + ci * HOLE_SPACING;
-      createHole(x, y, `left-${row}`, row + 1, col, `${col}${row+1}`);
+      createHole(x, TERMINAL_TOP + ci * HOLE_SPACING, `left-${row}`, row+1, col, `${col}${row+1}`);
     });
-
-    // Right side (f-j)
     COLS_RIGHT.forEach((col, ci) => {
-      const y = TERMINAL_BOTTOM_START + ci * HOLE_SPACING;
-      createHole(x, y, `right-${row}`, row + 1, col, `${col}${row+1}`);
+      createHole(x, TERMINAL_BOTTOM_START + ci * HOLE_SPACING, `right-${row}`, row+1, col, `${col}${row+1}`);
     });
   }
-
-  let activeGroup = null;
 
   function resetHighlights() {
     allHoles.forEach(h => {
@@ -589,16 +698,10 @@ footer {
 
   function onHoleClick(hole) {
     resetHighlights();
-
     const connected = allHoles.filter(h => h.group === hole.group);
     const isPower = hole.group.startsWith('power');
-
-    const color = isPower
-      ? (hole.group.includes('plus') ? '#ef4444' : '#3b82f6')
-      : '#22c55e';
-    const glow = isPower
-      ? (hole.group.includes('plus') ? '0 0 10px #f87171' : '0 0 10px #60a5fa')
-      : '0 0 10px #4ade80';
+    const color = isPower ? (hole.group.includes('plus') ? '#ef4444' : '#3b82f6') : '#22c55e';
+    const glow = isPower ? (hole.group.includes('plus') ? '0 0 10px #f87171' : '0 0 10px #60a5fa') : '0 0 10px #4ade80';
 
     connected.forEach(h => {
       h.el.setAttribute('fill', color);
@@ -607,21 +710,18 @@ footer {
       h.el.style.filter = `drop-shadow(${glow})`;
     });
 
-    // Build info text
     let msg = '';
     if (isPower) {
       const rail = hole.group.includes('plus') ? 'Plus (+)' : 'Minus (−)';
       const pos = hole.group.includes('top') ? 'obere' : 'untere';
-      msg = `<strong>Power Rail:</strong> ${rail}-Schiene, ${pos} Seite. Alle <strong>${connected.length} Löcher</strong> dieser Schiene sind intern verbunden — ideal für die Stromversorgung.`;
+      msg = `<strong>Power Rail:</strong> ${rail}-Schiene, ${pos} Seite. Alle <strong>${connected.length} Löcher</strong> dieser Schiene sind intern verbunden.`;
     } else {
       const side = hole.group.startsWith('left') ? 'linke' : 'rechte';
       const cols = connected.map(h => h.label).join(', ');
-      msg = `<strong>Terminal Strip, Reihe ${hole.row}, ${side} Seite:</strong> Die Löcher <strong>${cols}</strong> sind intern verbunden (${connected.length} Löcher). Die andere Seite der DIP-Rinne ist NICHT verbunden!`;
+      msg = `<strong>Reihe ${hole.row}, ${side} Seite:</strong> Die Löcher <strong>${cols}</strong> sind verbunden (${connected.length} Löcher). Die andere Seite der DIP-Rinne ist NICHT verbunden!`;
     }
-
     info.innerHTML = msg;
     info.classList.add('active');
-    activeGroup = hole.group;
   }
 })();
 
@@ -630,85 +730,44 @@ footer {
 // ============================================================
 (function() {
   const questions = document.querySelectorAll('.quiz-question');
-  let answered = 0;
-  let score = 0;
+  let answered = 0, score = 0;
 
   const explanations = [
-    ['Nicht ganz — es sind mehr als 3.', 'Richtig! Auf jeder Seite der DIP-Rinne sind genau 5 Löcher (a–e oder f–j) intern verbunden.', 'Nein — 10 wäre die gesamte Reihe über die Rinne hinweg, aber die Rinne trennt die Seiten.', 'Nein — nur die Power Rails verbinden alle Löcher einer Leiste.'],
-    ['Falsch — da beide Löcher intern verbunden sind, wird der Widerstand überbrückt.', 'Nein — das hat keinen Einfluss auf den Widerstandswert.', 'Richtig! Die Löcher a5 und c5 sind in derselben 5er-Gruppe und damit direkt verbunden. Der Strom fließt am Widerstand vorbei.', 'Nein — ein Kurzschluss macht nichts heller.'],
-    ['Richtig! ICs werden über die Rinne gesteckt, damit jeder Pin eine eigene 5er-Gruppe hat.', 'Nein — Belüftung ist hier kein Thema.', 'Nein — die Stromschienen sind am Rand, nicht in der Mitte.', 'Nein — die Rinne hat eine wichtige elektrische Funktion.'],
-    ['Falsch — die DIP-Rinne trennt die beiden Seiten elektrisch.', 'Richtig! Die DIP-Rinne ist eine elektrische Trennung. Links (a–e) und rechts (f–j) sind unabhängig.', 'Nein — Power Rails sind ein anderer Bereich.', 'Nein — ein IC verbindet nicht automatisch die Seiten.']
+    ['Nicht ganz — es sind mehr als 3.', 'Richtig! Auf jeder Seite der DIP-Rinne sind genau 5 Löcher (a–e oder f–j) intern verbunden.', 'Nein — 10 wäre die gesamte Reihe über die Rinne hinweg, aber die Rinne trennt.', 'Nein — nur die Power Rails verbinden alle Löcher einer Leiste.'],
+    ['Falsch — beide Löcher sind intern verbunden, der Widerstand wird überbrückt.', 'Nein — das hat keinen Einfluss auf den Widerstandswert.', 'Richtig! a5 und c5 sind in derselben 5er-Gruppe. Der Strom fließt am Widerstand vorbei.', 'Nein — ein Kurzschluss macht nichts heller.'],
+    ['Richtig! ICs werden über die Rinne gesteckt, damit jeder Pin seine eigene 5er-Gruppe hat.', 'Nein — Belüftung ist hier kein Thema.', 'Nein — Stromschienen sind am Rand.', 'Nein — die Rinne hat eine wichtige elektrische Funktion.'],
+    ['Falsch — die DIP-Rinne trennt die beiden Seiten.', 'Richtig! Die DIP-Rinne ist eine elektrische Trennung.', 'Nein — Power Rails sind ein anderer Bereich.', 'Nein — ein IC verbindet nicht automatisch die Seiten.']
   ];
 
   questions.forEach((q, qi) => {
     const correct = parseInt(q.dataset.correct);
     const btns = q.querySelectorAll('.quiz-option');
     const fb = q.querySelector('.quiz-feedback');
-
     btns.forEach(btn => {
       btn.addEventListener('click', () => {
         if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
         const val = parseInt(btn.dataset.value);
         const isCorrect = val === correct;
-
-        // Disable all buttons
         btns.forEach(b => b.disabled = true);
-
-        // Highlight
         btns[correct].classList.add('correct');
         if (!isCorrect) btn.classList.add('wrong');
-
-        // Feedback
         fb.textContent = explanations[qi][val];
         fb.className = 'quiz-feedback show ' + (isCorrect ? 'correct' : 'wrong');
-
         if (isCorrect) score++;
         answered++;
-
-        if (answered === questions.length) showResult();
+        if (answered === questions.length) {
+          const el = document.getElementById('quiz-result');
+          const pct = Math.round(score / questions.length * 100);
+          if (pct === 100) { el.textContent = `Perfekt! ${score}/${questions.length} richtig — Sie haben das Breadboard voll verstanden!`; el.style.background = '#dcfce7'; el.style.color = '#166534'; }
+          else if (pct >= 50) { el.textContent = `${score}/${questions.length} richtig — gute Grundlage! Markierte Abschnitte noch einmal lesen.`; el.style.background = '#fef9c3'; el.style.color = '#854d0e'; }
+          else { el.textContent = `${score}/${questions.length} richtig — lesen Sie die Abschnitte oben noch einmal durch!`; el.style.background = '#fee2e2'; el.style.color = '#991b1b'; }
+          el.classList.add('show');
+        }
       });
     });
   });
-
-  function showResult() {
-    const el = document.getElementById('quiz-result');
-    const pct = Math.round(score / questions.length * 100);
-    let msg = '';
-    if (pct === 100) {
-      msg = `Perfekt! ${score}/${questions.length} richtig — Sie haben das Breadboard voll verstanden!`;
-      el.style.background = '#dcfce7';
-      el.style.color = '#166534';
-    } else if (pct >= 50) {
-      msg = `${score}/${questions.length} richtig — gute Grundlage! Lesen Sie die markierten Abschnitte noch einmal durch.`;
-      el.style.background = '#fef9c3';
-      el.style.color = '#854d0e';
-    } else {
-      msg = `${score}/${questions.length} richtig — lesen Sie die Abschnitte oben noch einmal in Ruhe durch und probieren Sie das interaktive Breadboard aus!`;
-      el.style.background = '#fee2e2';
-      el.style.color = '#991b1b';
-    }
-    el.textContent = msg;
-    el.classList.add('show');
-  }
 })();
 </script>
-
-    <section id="simulator" style="max-width: 900px; margin: 2rem auto; padding: 2rem;">
-      <h2 style="color: #1a3a5c; border-bottom: 3px solid #2196F3; padding-bottom: 0.5rem;">🔧 Jetzt selbst ausprobieren!</h2>
-      <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-radius: 12px; padding: 2rem; text-align: center; margin-top: 1rem;">
-        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-          Bauen Sie Ihre eigene Schaltung auf einem virtuellen Breadboard — mit echten Widerständen, LEDs und Kabeln!
-        </p>
-        <a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener"
-           style="display: inline-block; background: #1a3a5c; color: white; padding: 1rem 2.5rem; border-radius: 8px; text-decoration: none; font-size: 1.2rem; font-weight: bold; transition: transform 0.2s;">
-          🚀 Tinkercad Circuits öffnen
-        </a>
-        <p style="font-size: 0.9rem; color: #555; margin-top: 1rem;">
-          Kostenlos von Autodesk — Drag & Drop Bauteile aufs Breadboard, Simulation starten, Schaltung testen.
-          <br>Erstellen Sie einen kostenlosen Account und legen Sie los!
-        </p>
-      </div>
-    </section>
 
 </body>
 </html>
